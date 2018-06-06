@@ -1,3 +1,5 @@
+import json
+
 def add(userInput,inventory):
     #format: A,item name, amount, price
     isFound = False
@@ -14,8 +16,8 @@ def add(userInput,inventory):
     if isFound == False:
         newItem = {}
         newItem["NAME"] = userInput[1]
-        newItem["NUMBER"] = userInput[2]
-        newItem["VALUE"] = userInput[3]
+        newItem["NUMBER"] = int(userInput[2])
+        newItem["VALUE"] = float(userInput[3])
         inventory.append(newItem)
 
     return inventory
@@ -61,3 +63,16 @@ def get_current_stock(inventory):
         sumOfValue += float(oneDict["VALUE"] * oneDict["NUMBER"])
 
     return (sumOfStock,sumOfValue)
+
+
+def save_to_file(inventory):
+    with open('inventory.inv', 'w') as file:
+        json.dump(inventory, file)
+        file.close()
+
+def load_from_file():
+    with open('inventory.inv', 'r') as file:
+        inventory = json.load(file)
+
+    file.close()
+    return inventory

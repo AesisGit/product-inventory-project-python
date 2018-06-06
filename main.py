@@ -3,7 +3,7 @@ import calculation
 def current_stock(inventory):
     if inventory:
         for oneDict in inventory:
-            for k,v in oneDict.items():
+            for k, v in oneDict.items():
                 print("{} : {}" .format(k, v))
             print("*" * 10)
             sumOfStock, sumOfValue = calculation.get_current_stock(inventory)
@@ -18,8 +18,7 @@ def try_again():
     print("Please try again. I don't understand.")
 
 def main():
-    inventory = [{"NAME": "ABC", "NUMBER": 2, "VALUE": 25.0}, {"NAME": "AAA", "NUMBER": 2, "VALUE": 1},
-                 {"NAME": "VVV", "NUMBER": 2, "VALUE": 4}]
+    inventory = (calculation.load_from_file())
 
     while True:
         userInput = input("Choices:\n[A] and amount to [A]dd.\n[S] and amount to [S]ell\n[L] to [L]ist current stock\n[x] for E[x]it.\nEnter command: ")
@@ -39,6 +38,8 @@ def main():
             inventory = calculation.sell(userInput, inventory)
         else:
             try_again()
+
+    calculation.save_to_file(inventory)
 
 if __name__=="__main__":
     main()
