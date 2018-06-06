@@ -1,14 +1,15 @@
-#Actions format for is LETTERNUMBER
-
-
-from calculation import submit, sell
+import calculation
 
 def current_stock(inventory):
     if inventory:
         for oneDict in inventory:
             for k,v in oneDict.items():
-                print("{} : {}" .format(k,v))
-            print("*" *10)
+                print("{} : {}" .format(k, v))
+            print("*" * 10)
+            sumOfStock, sumOfValue = calculation.get_current_stock(inventory)
+
+        print("*** Total stock is: {}. ***" .format(sumOfStock))
+        print("*** Total stock value: {}. ***".format(sumOfValue))
 
     else:
         print("Inventory is empty!")
@@ -17,7 +18,7 @@ def try_again():
     print("Please try again. I don't understand.")
 
 def main():
-    inventory = [{"NAME": "ABC", "NUMBER": 21, "VALUE": 50.0}, {"NAME": "AAA", "NUMBER": 2, "VALUE": 4.3},
+    inventory = [{"NAME": "ABC", "NUMBER": 1, "VALUE": 50.0}, {"NAME": "AAA", "NUMBER": 2, "VALUE": 1},
                  {"NAME": "VVV", "NUMBER": 2, "VALUE": 4}]
 
     while True:
