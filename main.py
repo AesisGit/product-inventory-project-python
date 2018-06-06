@@ -9,7 +9,7 @@ def current_stock(inventory):
             sumOfStock, sumOfValue = calculation.get_current_stock(inventory)
 
         print("*** Total stock is: {}. ***" .format(sumOfStock))
-        print("*** Total stock value: {}. ***".format(sumOfValue))
+        print("*** Total stock value: {}$. ***".format(sumOfValue))
 
     else:
         print("Inventory is empty!")
