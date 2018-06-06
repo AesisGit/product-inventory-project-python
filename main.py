@@ -18,7 +18,7 @@ def try_again():
     print("Please try again. I don't understand.")
 
 def main():
-    inventory = [{"NAME": "ABC", "NUMBER": 1, "VALUE": 50.0}, {"NAME": "AAA", "NUMBER": 2, "VALUE": 1},
+    inventory = [{"NAME": "ABC", "NUMBER": 2, "VALUE": 25.0}, {"NAME": "AAA", "NUMBER": 2, "VALUE": 1},
                  {"NAME": "VVV", "NUMBER": 2, "VALUE": 4}]
 
     while True:
@@ -26,17 +26,17 @@ def main():
         userInput  = userInput.upper().split(',')
 
         if userInput[0] == "X":
+            current_stock(inventory)
             print("Good bye !")
             break
-        elif userInput[0] == 'X':
-            current_stock(sums)
         elif userInput[0] == "L":
             current_stock(inventory)
 
         elif userInput[0] == "A":
-            sums = submit(userInput, sums)
+            inventory = calculation.add(userInput, inventory)
+            print(inventory)
         elif userInput[0] == "S":
-            sums = sell(userInput, sums)
+            inventory = calculation.sell(userInput, inventory)
         else:
             try_again()
 
