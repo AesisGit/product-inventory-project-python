@@ -41,15 +41,16 @@ def sell(userInput,inventory):
             elif (currentLager - wantsToSell) < 0:
                 oneDict["NUMBER"] = 0
                 oneDict["VALUE"] = 0
-                print("Subtracted as much as possible\nThere was {0} on lager and you subtracted {1}.\n"
-                      "I removed {2} and there is {3} left to be removed".format(currentLager,
-                                                                                 wantsToSell,currentLager, (wantsToSell - currentLager)))
+                return ("notEnough", inventory)
+             #   print("Subtracted as much as possible\nThere was {0} on lager and you subtracted {1}.\n"
+             #         "I removed {2} and there is {3} left to be removed".format(currentLager,
+             #                                                                    wantsToSell, currentLager, (wantsToSell - currentLager)))
 
     #If the selling item has never been in the warehouse inform the user
    if isFound == False:
        print("Cant find {0}. {0} has never been in the warehouse!".format((userInput[1])))
 
-   return inventory
+   return ("OK", inventory)
 
 
 

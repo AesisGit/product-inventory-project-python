@@ -3,7 +3,6 @@ import calculation
 def current_stock(inventory):
     if inventory:
         for oneDict in inventory:
-            for k, v in oneDict.items():
                 print("{} : {}" .format(k, v))
             print("*" * 10)
             sumOfStock, sumOfValue = calculation.get_current_stock(inventory)
