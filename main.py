@@ -45,7 +45,7 @@ def main():
         else:
             try_again()
 
-    #Save current inventory situation for later user
+    #Save current inventory situation for later use
     calculation.save_to_file(inventory)
 
 if __name__=="__main__":

@@ -65,6 +65,7 @@ def get_current_stock(inventory):
     return (sumOfStock,sumOfValue)
 
 
+
 def save_to_file(inventory):
     with open('inventory.inv', 'w') as file:
         json.dump(inventory, file)
