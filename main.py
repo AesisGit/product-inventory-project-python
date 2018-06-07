@@ -1,5 +1,6 @@
 import calculation
 
+#Display total number and total value of inventory
 def current_stock(inventory):
     if inventory:
         for oneDict in inventory:
@@ -24,21 +25,27 @@ def main():
         userInput = input("Choices:\n[A] and amount to [A]dd.\n[S] and amount to [S]ell\n[L] to [L]ist current stock\n[x] for E[x]it.\nEnter command: ")
         userInput  = userInput.upper().split(',')
 
+        #On exit show current stock and break
         if userInput[0] == "X":
             current_stock(inventory)
             print("Good bye !")
             break
+
+        #Show current stock
         elif userInput[0] == "L":
             current_stock(inventory)
 
+        #On Add stock call add function from calculation module
         elif userInput[0] == "A":
             inventory = calculation.add(userInput, inventory)
 
+        # On Sell stock call sell function from calculation module
         elif userInput[0] == "S":
             inventory = calculation.sell(userInput, inventory)
         else:
             try_again()
 
+    #Save current inventory situation for later user
     calculation.save_to_file(inventory)
 
 if __name__=="__main__":
