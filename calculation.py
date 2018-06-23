@@ -36,6 +36,14 @@ def add(userInput,inventory):
 
     return inventory
 
+def selling_item_remains_on_lager(oneDict, wantsToSell):
+    oneDict["NUMBER"] = oneDict["NUMBER"] - wantsToSell
+    # If amount after subtraction is 0 the value is also 0
+    if oneDict["NUMBER"] == 0:
+        oneDict["VALUE"] = 0
+
+    return(oneDict["NUMBER"], oneDict["VALUE"])
+
 def sell(userInput,inventory):
    isFound = False
    for oneDict in inventory:
@@ -47,10 +55,8 @@ def sell(userInput,inventory):
 
             #If amount after subtraction is >= 0
             if currentLager - wantsToSell >= 0:
-                oneDict["NUMBER"] = oneDict["NUMBER"] - wantsToSell
-                #If amount after subtraction is 0 the value is also 0
-                if oneDict["NUMBER"] == 0:
-                    oneDict["VALUE"] = 0
+                oneDict["NUMBER"], oneDict["VALUE"] = selling_item_remains_on_lager(oneDict, wantsToSell)
+
             #If amount after subtraction would be bellow 0, make it 0 and tell the user num that can not be subtracted
             elif (currentLager - wantsToSell) < 0:
                 oneDict["NUMBER"] = 0
