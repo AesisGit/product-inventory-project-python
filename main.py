@@ -1,5 +1,10 @@
 import calculation
 
+def help():
+    print("\n****************************************\nFormat for adding items: 'a,Item Name, Item Number, Item price'\n****************************************")
+    print("****************************************\nFormat for seling items: 's,Item Name, Item Number'\n****************************************\n")
+
+
 #Display total number and total value of inventory
 def current_stock(inventory):
     if inventory:
@@ -22,7 +27,7 @@ def main():
     inventory = (calculation.load_from_file())
 
     while True:
-        userInput = input("Choices:\n[A] and amount to [A]dd.\n[S] and amount to [S]ell\n[L] to [L]ist current stock\n[x] for E[x]it.\nEnter command: ")
+        userInput = input("Choices:\n[H] for [H]elp on information how to Add or Sell items.\n[A] and amount to [A]dd.\n[S] and amount to [S]ell\n[L] to [L]ist current stock\n[x] for E[x]it.\nEnter command: ")
         userInput  = userInput.upper().split(',')
 
         #On exit show current stock and break
@@ -30,6 +35,9 @@ def main():
             current_stock(inventory)
             print("Good bye !")
             break
+
+        elif userInput[0] =="H":
+            help()
 
         #Show current stock
         elif userInput[0] == "L":
