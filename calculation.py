@@ -10,12 +10,11 @@ def adding_item_to_inventory(userInput, inventory):
      return inventory
 
 
-def item_is_found(oneDict, userInput):
+def adding_when_item_is_found(oneDict, userInput):
     # Total value of current item + Total value of added stock of current item - total number of stock item
     oneDict["VALUE"] = (float(oneDict["VALUE"] * oneDict["NUMBER"]) + (float(userInput[2]) * float(userInput[3]))) / (
                 oneDict["NUMBER"] + int(userInput[2]))
     oneDict["NUMBER"] += int(userInput[2])
-
 
     return(oneDict["VALUE"], oneDict["NUMBER"])
 
@@ -28,7 +27,7 @@ def add(userInput,inventory):
         #print(oneDict)
         #If item is found make calculaton to get value of one item and add new stock to inventory stock.
         if userInput[1] == oneDict["NAME"]:
-            oneDict["Value"], oneDict["NUMBER"] = item_is_found(oneDict, userInput)
+            oneDict["Value"], oneDict["NUMBER"] = adding_when_item_is_found(oneDict, userInput)
             isFound = True
 
     #If item not found in inventory add it to inventory
