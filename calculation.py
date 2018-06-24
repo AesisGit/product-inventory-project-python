@@ -1,24 +1,22 @@
 import json
 
-def adding_item_to_inventory(userInput, inventory):
-     newItem = {}
-     newItem["NAME"] = userInput[1]
-     newItem["NUMBER"] = int(userInput[2])
-     newItem["VALUE"] = float(userInput[3])
-     inventory.append(newItem)
-
-     return inventory
-
 
 def adding_when_item_is_found(oneDict, userInput):
-    print(oneDict)
-    print(userInput)
     # Total value of current item + Total value of added stock of current item - total number of stock item
     oneDict["VALUE"] = (float(oneDict["VALUE"] * oneDict["NUMBER"]) + (float(userInput[2]) * float(userInput[3]))) / (
                 oneDict["NUMBER"] + int(userInput[2]))
     oneDict["NUMBER"] += int(userInput[2])
 
     return(oneDict["VALUE"], oneDict["NUMBER"])
+
+
+def adding_item_to_inventory(userInput, inventory):
+     newItem = {}
+     newItem["NAME"] = userInput[1]
+     newItem["NUMBER"] = int(userInput[2])
+     newItem["VALUE"] = float(userInput[3])
+     inventory.append(newItem)
+     return inventory
 
 
 def add(userInput,inventory):
