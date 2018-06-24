@@ -25,3 +25,10 @@ class SellingTestCase(unittest.TestCase):
 
 
 
+class StockTestCase(unittest.TestCase):
+
+    def test_get_current_stock(self):
+        sumOfStock, sumOfValue = calculation.get_current_stock([{'NAME': 'ITEM1', 'NUMBER': 11, 'VALUE': 50}, {'NAME': 'ITEM2', 'NUMBER': 2, 'VALUE': 4.3}, {'NAME': 'ITEM3', 'NUMBER': 3, 'VALUE': 10.0}])
+        self.assertEqual(sumOfStock, 16)
+        self.assertEqual(sumOfValue, (11*50 + 2*4.3 + 3*10))
+
