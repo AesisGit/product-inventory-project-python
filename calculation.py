@@ -94,6 +94,4 @@ def save_to_file(inventory):
 def load_from_file():
     with open('inventory.inv', 'r') as file:
         inventory = json.load(file)
-
-    file.close()
     return inventory

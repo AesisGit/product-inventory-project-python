@@ -24,7 +24,7 @@ def try_again():
     print("Please try again. I don't understand.")
 
 def main():
-    inventory = (calculation.load_from_file())
+    inventory = calculation.load_from_file()
 
     while True:
         userInput = input("Choices:\n[H] for [H]elp on information how to Add or Sell items.\n[A] and amount to [A]dd.\n[S] and amount to [S]ell\n[L] to [L]ist current stock\n[x] for E[x]it.\nEnter command: ")
