@@ -1,26 +1,28 @@
 import calculation
+from constants import HELP_TEXT
 
 def help():
     """
-    Outputing s help description on the screen
-    :return:
+    Outputing s help text to the screen
     """
-    print(
-        """\n****************************************\nFormat for adding items: 'a,Item Name, Item Number, Item price'\n****************************************
-           \n****************************************\nFormat for seling items: 's,Item Name, Item Number'\n****************************************\n""")
+    print(HELP_TEXT)
 
 #Display total number and total value of inventory
 def current_stock(inventory):
+    """
+
+    :param inventory: list of dictionaries containing stock info
+    :return:
+    """
     if inventory:
-        for oneDict in inventory:
-            for k, v in oneDict.items():
+        for item in inventory:
+            for k, v in item.items():
                 print("{} : {}" .format(k, v))
             print("*" * 10)
-            sumOfStock, sumOfValue = calculation.get_current_stock(inventory)
+            stock_total, stock_value = calculation.get_current_stock(inventory)
 
-        print("*** Total stock is: {}. ***" .format(sumOfStock))
-        print("*** Total stock value: {}$. ***".format(sumOfValue))
-
+        print("*** Total stock items: {}. ***" .format(stock_total))
+        print("*** Total stock value: {}$. ***".format(stock_value))
     else:
         print("Inventory is empty!")
 
