@@ -1,5 +1,5 @@
 import calculation
-from constants import HELP_TEXT
+from constants import HELP_TEXT, GOOD_BYE_TEXT
 
 def help():
     """
@@ -28,9 +28,36 @@ def current_stock(inventory):
 
 def try_again():
     print("Please try again. I don't understand.")
+def display_on_screen(**kwargs):
+    try:
+        text = kwargs["text"]
+    except KeyError as e:
+        print(e)
+    try:
+        break_command = ["break_comand"]
+    except:
+        pass
+    else:
+
+
+    print (text)
 
 def main():
     inventory = calculation.load_from_file()
+    commands = [
+        {"X":{
+            "call_function": display_on_screen
+            "function_input": GOOD_BYE_TEXT
+            "do_after": "break"
+        }
+        },
+        {"H":{
+            "call_function": display_on_screen
+            "function_input": HELP_TEXT
+        }}
+    ]
+
+    }
 
     while True:
         user_input = input("Choices:\n[H] for [H]elp on information how to Add or Sell items.\n[A] and amount to [A]dd.\n[S] and amount to [S]ell\n[L] to [L]ist current stock\n[x] for E[x]it.\nEnter command: ")
@@ -38,7 +65,6 @@ def main():
 
         #On exit show current stock and break
         if user_input[0] == "X":
-            print("Good bye !")
             break
 
         elif user_input[0] == "H":
