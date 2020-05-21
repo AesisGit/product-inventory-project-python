@@ -30,6 +30,7 @@ def current_stock(inventory):
 
 def try_again():
     print("Please try again. I don't understand.")
+
 def display_on_screen(**kwargs):
     try:
         text = kwargs["text"]
@@ -55,6 +56,10 @@ def main():
             "call_function": current_stock,
             "function_input": inventory
         }},
+        {"A": {
+            "call_function":  calculation.add,
+            "function_input": inventory
+        }},
     ]
 
 
@@ -72,12 +77,10 @@ def main():
                     sys.exit()
 
 
-        #On Add stock call add function from calculation module
-        if user_input[0] == "A":
-            calculation.add(user_input, inventory)
+
 
         # On Sell stock call sell function from calculation module
-        elif user_input[0] == "S":
+        if user_input[0] == "S":
             inventory = calculation.sell(user_input, inventory)
         else:
             try_again()

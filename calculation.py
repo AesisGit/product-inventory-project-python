@@ -18,11 +18,15 @@ def adding_item_to_inventory(userInput, inventory):
      inventory.append(newItem)
      return inventory
 
+def get_item_data_from_user():
+    user_input = input("item name, item value, item number")
+    user_input.split(",")
+    return user_input[0],user_input[1],user_input[2]
 
 def add(userInput,inventory):
     #format: A,item name, amount, price
     isFound = False
-
+    item_name, item_value, item_number = get_item_data_from_user()
     for oneDict in inventory:
         #print(oneDict)
         #If item is found make calculaton to get value of one item and add new stock to inventory stock.
