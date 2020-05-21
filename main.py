@@ -37,12 +37,6 @@ def display_on_screen(**kwargs):
         print(e)
     else:
         print(text)
-    try:
-        break_command = ["break_comand"]
-    except:
-        pass
-    else:
-        sys.exit()
 
 def main():
     inventory = calculation.load_from_file()
@@ -74,6 +68,8 @@ def main():
                 called_command = command[user_input]
                 function_to_call = called_command["call_function"]
                 function_to_call(text=called_command["function_input"])
+                if "break_command" in called_command:
+                    sys.exit()
 
 
         #On Add stock call add function from calculation module
