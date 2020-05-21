@@ -1,5 +1,7 @@
 import calculation
 from constants import HELP_TEXT, GOOD_BYE_TEXT
+import sys
+
 
 def help():
     """
@@ -33,50 +35,50 @@ def display_on_screen(**kwargs):
         text = kwargs["text"]
     except KeyError as e:
         print(e)
+    else:
+        print(text)
     try:
         break_command = ["break_comand"]
     except:
         pass
     else:
-
-
-    print (text)
+        sys.exit()
 
 def main():
     inventory = calculation.load_from_file()
     commands = [
         {"X":{
-            "call_function": display_on_screen
-            "function_input": GOOD_BYE_TEXT
-            "do_after": "break"
+            "call_function": display_on_screen,
+            "function_input": GOOD_BYE_TEXT,
+            "break_command": "break_command"
         }
         },
         {"H":{
-            "call_function": display_on_screen
+            "call_function": display_on_screen,
             "function_input": HELP_TEXT
-        }}
+        }},
+        {"L": {
+            "call_function": current_stock,
+            "function_input": inventory
+        }},
     ]
 
-    }
+
 
     while True:
         user_input = input("Choices:\n[H] for [H]elp on information how to Add or Sell items.\n[A] and amount to [A]dd.\n[S] and amount to [S]ell\n[L] to [L]ist current stock\n[x] for E[x]it.\nEnter command: ")
         user_input = user_input.upper()
 
-        #On exit show current stock and break
-        if user_input[0] == "X":
-            break
+        for command in commands:
+            if user_input in command:
+                called_command = command[user_input]
+                function_to_call = called_command["call_function"]
+                function_to_call(text=called_command["function_input"])
 
-        elif user_input[0] == "H":
-            help()
-
-        #Show current stock
-        elif user_input[0] == "L":
-            current_stock(inventory)
 
         #On Add stock call add function from calculation module
-        elif user_input[0] == "A":
-            inventory = calculation.add(user_input, inventory)
+        if user_input[0] == "A":
+            calculation.add(user_input, inventory)
 
         # On Sell stock call sell function from calculation module
         elif user_input[0] == "S":
