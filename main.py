@@ -61,6 +61,10 @@ def main():
             "call_function":  calculation.add,
             "function_input": inventory
         }},
+        {"S": {
+            "call_function": calculation.sell,
+            "function_input": inventory
+        }},
     ]
 
 
@@ -77,17 +81,6 @@ def main():
                 calculation.save_to_file(inventory)
                 if "break_command" in called_command:
                     sys.exit()
-
-
-
-
-        # On Sell stock call sell function from calculation module
-        if user_input[0] == "S":
-            inventory = calculation.sell(user_input, inventory)
-        else:
-            try_again()
-
-
 
 if __name__=="__main__":
     main()

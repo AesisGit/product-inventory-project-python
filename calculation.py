@@ -49,14 +49,16 @@ def selling_item_still_on_lager(oneDict, wantsToSell):
 
     return(oneDict["NUMBER"], oneDict["VALUE"])
 
-def sell(userInput,inventory):
+def sell(param1):
+   inventory = param1
    isFound = False
+   item_name, item_value, item_number = get_item_data_from_user()
    for oneDict in inventory:
        #Find the item to subtract
-       if userInput[1] == oneDict["NAME"]:
+       if item_name == oneDict["NAME"]:
             isFound = True
             currentLager = oneDict["NUMBER"]
-            wantsToSell = int(userInput[2])
+            wantsToSell = int(item_number)
 
             #If amount after subtraction is >= 0
             if currentLager - wantsToSell >= 0:
@@ -72,7 +74,7 @@ def sell(userInput,inventory):
 
     #If the selling item has never been in the warehouse inform the user
    if isFound == False:
-       print("Cant find {0}. {0} has never been in the warehouse!".format((userInput[1])))
+       print("Cant find {0}. {0} has never been in the warehouse!".format(item_name))
 
    return (inventory)
 
