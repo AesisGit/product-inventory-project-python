@@ -10,11 +10,11 @@ def adding_when_item_is_found(oneDict, item_value, item_number):
     return(oneDict["VALUE"], oneDict["NUMBER"])
 
 
-def adding_item_to_inventory(userInput, inventory):
+def adding_item_to_inventory(inventory, item_name, item_value, item_number):
      newItem = {}
-     newItem["NAME"] = userInput[1]
-     newItem["NUMBER"] = int(userInput[2])
-     newItem["VALUE"] = float(userInput[3])
+     newItem["NAME"] = item_name
+     newItem["NUMBER"] = int(item_number)
+     newItem["VALUE"] = float(item_value)
      inventory.append(newItem)
      return inventory
 
@@ -23,7 +23,8 @@ def get_item_data_from_user():
     user_input.split(",")
     return user_input[0],user_input[1],user_input[2]
 
-def add(userInput, inventory):
+def add(param1):
+    inventory = param1
     #format: A,item name, amount, price
     isFound = False
     item_name, item_value, item_number = get_item_data_from_user()
@@ -36,7 +37,7 @@ def add(userInput, inventory):
 
     #If item not found in inventory add it to inventory
     if isFound == False:
-        inventory = adding_item_to_inventory(userInput, inventory)
+        inventory = adding_item_to_inventory(inventory, item_name, item_value, item_number)
 
     return inventory
 

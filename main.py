@@ -33,7 +33,7 @@ def try_again():
 
 def display_on_screen(**kwargs):
     try:
-        text = kwargs["text"]
+        param1 = kwargs["text"]
     except KeyError as e:
         print(e)
     else:
@@ -48,7 +48,7 @@ def main():
             "break_command": "break_command"
         }
         },
-        {"H":{
+        {"H": {
             "call_function": display_on_screen,
             "function_input": HELP_TEXT
         }},
@@ -72,7 +72,7 @@ def main():
             if user_input in command:
                 called_command = command[user_input]
                 function_to_call = called_command["call_function"]
-                function_to_call(text=called_command["function_input"])
+                function_to_call(param1=called_command["function_input"])
                 if "break_command" in called_command:
                     sys.exit()
 
