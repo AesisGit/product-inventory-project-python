@@ -1,11 +1,11 @@
 import json
 
 
-def adding_when_item_is_found(oneDict, userInput):
+def adding_when_item_is_found(oneDict, item_value, item_number):
     # Total value of current item + Total value of added stock of current item - total number of stock item
-    oneDict["VALUE"] = (float(oneDict["VALUE"] * oneDict["NUMBER"]) + (float(userInput[2]) * float(userInput[3]))) / (
-                oneDict["NUMBER"] + int(userInput[2]))
-    oneDict["NUMBER"] += int(userInput[2])
+    oneDict["VALUE"] = (float(oneDict["VALUE"] * oneDict["NUMBER"]) + (float(item_value) * float(item_number))) / (
+                oneDict["NUMBER"] + int(item_number))
+    oneDict["NUMBER"] += int(item_number)
 
     return(oneDict["VALUE"], oneDict["NUMBER"])
 
@@ -23,15 +23,15 @@ def get_item_data_from_user():
     user_input.split(",")
     return user_input[0],user_input[1],user_input[2]
 
-def add(userInput,inventory):
+def add(userInput, inventory):
     #format: A,item name, amount, price
     isFound = False
     item_name, item_value, item_number = get_item_data_from_user()
-    for oneDict in inventory:
+    for one_item in inventory:
         #print(oneDict)
         #If item is found make calculaton to get value of one item and add new stock to inventory stock.
-        if userInput[1] == oneDict["NAME"]:
-            oneDict["Value"], oneDict["NUMBER"] = adding_when_item_is_found(oneDict, userInput)
+        if item_name == one_item["NAME"]:
+            one_item["Value"], one_item["NUMBER"] = adding_when_item_is_found(one_item, item_value, item_number)
             isFound = True
 
     #If item not found in inventory add it to inventory
