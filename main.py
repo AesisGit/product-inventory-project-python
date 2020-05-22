@@ -34,16 +34,16 @@ def try_again():
 
 def display_on_screen(**kwargs):
     try:
-        param1 = kwargs["text"]
+        text = kwargs["param1"]
     except KeyError as e:
         print(e)
     else:
-        print(param1)
+        print(text)
 
 def main():
     inventory = calculation.load_from_file()
     commands = [
-        {"X":{
+        {"X": {
             "call_function": display_on_screen,
             "function_input": GOOD_BYE_TEXT,
             "break_command": "break_command"
@@ -74,8 +74,8 @@ def main():
                 called_command = command[user_input]
                 function_to_call = called_command["call_function"]
                 function_to_call(param1=called_command["function_input"])
+                calculation.save_to_file(inventory)
                 if "break_command" in called_command:
-                    calculation.save_to_file(inventory)
                     sys.exit()
 
 
