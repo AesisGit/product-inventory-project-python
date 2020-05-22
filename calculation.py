@@ -1,6 +1,5 @@
 import json
 
-
 def adding_when_item_is_found(oneDict, item_value, item_number):
     # Total value of current item + Total value of added stock of current item - total number of stock item
     oneDict["VALUE"] = (float(oneDict["VALUE"] * oneDict["NUMBER"]) + (float(item_value) * float(item_number))) / (
