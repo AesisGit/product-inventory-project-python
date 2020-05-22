@@ -20,8 +20,8 @@ def adding_item_to_inventory(inventory, item_name, item_value, item_number):
 
 def get_item_data_from_user():
     user_input = input("item name, item value, item number")
-    user_input.split(",")
-    return user_input[0],user_input[1],user_input[2]
+    user_input = user_input.split(",")
+    return user_input[0], user_input[1], user_input[2]
 
 def add(param1):
     inventory = param1
