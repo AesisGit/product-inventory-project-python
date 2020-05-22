@@ -10,12 +10,13 @@ def help():
     print(HELP_TEXT)
 
 #Display total number and total value of inventory
-def current_stock(inventory):
+def current_stock(param1):
     """
 
     :param inventory: list of dictionaries containing stock info
     :return:
     """
+    inventory = param1
     if inventory:
         for item in inventory:
             for k, v in item.items():
@@ -37,7 +38,7 @@ def display_on_screen(**kwargs):
     except KeyError as e:
         print(e)
     else:
-        print(text)
+        print(param1)
 
 def main():
     inventory = calculation.load_from_file()
@@ -74,6 +75,7 @@ def main():
                 function_to_call = called_command["call_function"]
                 function_to_call(param1=called_command["function_input"])
                 if "break_command" in called_command:
+                    calculation.save_to_file(inventory)
                     sys.exit()
 
 
@@ -85,8 +87,7 @@ def main():
         else:
             try_again()
 
-    #Save current inventory situation for later use
-    calculation.save_to_file(inventory)
+
 
 if __name__=="__main__":
     main()
