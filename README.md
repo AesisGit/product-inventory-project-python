@@ -7,5 +7,3 @@
 
 ## Getting Started
 Product-inventory-project is a pure Python app made with Python 3.
-Code explanation is located in the comments.
-

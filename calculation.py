@@ -1,38 +1,42 @@
 import json
 
-
-def adding_when_item_is_found(oneDict, userInput):
+def adding_when_item_is_found(oneDict, item_value, item_number):
     # Total value of current item + Total value of added stock of current item - total number of stock item
-    oneDict["VALUE"] = (float(oneDict["VALUE"] * oneDict["NUMBER"]) + (float(userInput[2]) * float(userInput[3]))) / (
-                oneDict["NUMBER"] + int(userInput[2]))
-    oneDict["NUMBER"] += int(userInput[2])
+    oneDict["VALUE"] = (float(oneDict["VALUE"] * oneDict["NUMBER"]) + (float(item_value) * float(item_number))) / (
+                oneDict["NUMBER"] + int(item_number))
+    oneDict["NUMBER"] += int(item_number)
 
     return(oneDict["VALUE"], oneDict["NUMBER"])
 
 
-def adding_item_to_inventory(userInput, inventory):
+def adding_item_to_inventory(inventory, item_name, item_value, item_number):
      newItem = {}
-     newItem["NAME"] = userInput[1]
-     newItem["NUMBER"] = int(userInput[2])
-     newItem["VALUE"] = float(userInput[3])
+     newItem["NAME"] = item_name
+     newItem["NUMBER"] = int(item_number)
+     newItem["VALUE"] = float(item_value)
      inventory.append(newItem)
      return inventory
 
+def get_item_data_from_user():
+    user_input = input("item name, item value, item number")
+    user_input = user_input.split(",")
+    return user_input[0], user_input[1], user_input[2]
 
-def add(userInput,inventory):
+def add(param1):
+    inventory = param1
     #format: A,item name, amount, price
     isFound = False
-
-    for oneDict in inventory:
+    item_name, item_value, item_number = get_item_data_from_user()
+    for one_item in inventory:
         #print(oneDict)
         #If item is found make calculaton to get value of one item and add new stock to inventory stock.
-        if userInput[1] == oneDict["NAME"]:
-            oneDict["Value"], oneDict["NUMBER"] = adding_when_item_is_found(oneDict, userInput)
+        if item_name == one_item["NAME"]:
+            one_item["Value"], one_item["NUMBER"] = adding_when_item_is_found(one_item, item_value, item_number)
             isFound = True
 
     #If item not found in inventory add it to inventory
     if isFound == False:
-        inventory = adding_item_to_inventory(userInput, inventory)
+        inventory = adding_item_to_inventory(inventory, item_name, item_value, item_number)
 
     return inventory
 
@@ -44,14 +48,16 @@ def selling_item_still_on_lager(oneDict, wantsToSell):
 
     return(oneDict["NUMBER"], oneDict["VALUE"])
 
-def sell(userInput,inventory):
+def sell(param1):
+   inventory = param1
    isFound = False
+   item_name, item_value, item_number = get_item_data_from_user()
    for oneDict in inventory:
        #Find the item to subtract
-       if userInput[1] == oneDict["NAME"]:
+       if item_name == oneDict["NAME"]:
             isFound = True
             currentLager = oneDict["NUMBER"]
-            wantsToSell = int(userInput[2])
+            wantsToSell = int(item_number)
 
             #If amount after subtraction is >= 0
             if currentLager - wantsToSell >= 0:
@@ -67,7 +73,7 @@ def sell(userInput,inventory):
 
     #If the selling item has never been in the warehouse inform the user
    if isFound == False:
-       print("Cant find {0}. {0} has never been in the warehouse!".format((userInput[1])))
+       print("Cant find {0}. {0} has never been in the warehouse!".format(item_name))
 
    return (inventory)
 
