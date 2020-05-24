@@ -81,6 +81,8 @@ def main():
                 calculation.save_to_file(inventory)
                 if "break_command" in called_command:
                     sys.exit()
+            else:
+                try_again()
 
 if __name__=="__main__":
     main()
