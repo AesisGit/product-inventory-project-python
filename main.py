@@ -1,5 +1,5 @@
 import calculation
-from constants import HELP_TEXT, GOOD_BYE_TEXT
+from constants import HELP_TEXT, GOOD_BYE_TEXT, TRY_AGAIN_TEXT
 import sys
 
 
@@ -28,9 +28,6 @@ def current_stock(param1):
         print("*** Total stock value: {}$. ***".format(stock_value))
     else:
         print("Inventory is empty!")
-
-def try_again():
-    print("Please try again. I don't understand.")
 
 def display_on_screen(**kwargs):
     try:
@@ -82,7 +79,10 @@ def main():
                 if "break_command" in called_command:
                     sys.exit()
             else:
-                try_again()
+                params = {
+                    "param1": TRY_AGAIN_TEXT
+                }
+                display_on_screen(**params)
 
 if __name__=="__main__":
     main()
