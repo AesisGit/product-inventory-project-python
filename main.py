@@ -1,20 +1,13 @@
 import calculation
-from constants import HELP_TEXT, GOOD_BYE_TEXT
+from constants import HELP_TEXT, GOOD_BYE_TEXT, TRY_AGAIN_TEXT
 import sys
 
-
-def help():
-    """
-    Outputing s help text to the screen
-    """
-    print(HELP_TEXT)
-
-#Display total number and total value of inventory
 def current_stock(param1):
     """
-
+    Goal: Display total number and total value of inventory
+    Story: Function takes inventory parameter, does calculations and prints stock and value
     :param inventory: list of dictionaries containing stock info
-    :return:
+    :return: N
     """
     inventory = param1
     if inventory:
@@ -29,10 +22,13 @@ def current_stock(param1):
     else:
         print("Inventory is empty!")
 
-def try_again():
-    print("Please try again. I don't understand.")
-
 def display_on_screen(**kwargs):
+    """
+    Goal: Display text on screen
+    Story: Taking in kwargs params that holds a constant text and displaying and printing it out
+    :param kwargs: String stored in costants
+    :return: N
+    """
     try:
         text = kwargs["param1"]
     except KeyError as e:
@@ -41,6 +37,12 @@ def display_on_screen(**kwargs):
         print(text)
 
 def main():
+    """
+    Goal: Main function that manages calculations.
+    Story: inventory is loaded at the start. Depending on user input neccecary acions are called. All actions are store
+    in commands var.
+    :return: N
+    """
     inventory = calculation.load_from_file()
     commands = [
         {"X": {
@@ -81,6 +83,11 @@ def main():
                 calculation.save_to_file(inventory)
                 if "break_command" in called_command:
                     sys.exit()
+            else:
+                params = {
+                    "param1": TRY_AGAIN_TEXT
+                }
+                display_on_screen(**params)
 
 if __name__=="__main__":
     main()

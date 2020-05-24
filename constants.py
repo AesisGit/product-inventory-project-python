@@ -2,3 +2,6 @@ HELP_TEXT = """\n****************************************\nFormat for adding ite
            \n****************************************\nFormat for seling items: 's,Item Name, Item Number'\n****************************************\n"""
 
 GOOD_BYE_TEXT = "Good bye !"
+
+TRY_AGAIN_TEXT = "Please try again. I don't understand."
+
