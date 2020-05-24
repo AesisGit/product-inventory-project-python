@@ -1,6 +1,13 @@
 import json
 
-def adding_when_item_is_found(oneDict, item_value, item_number):
+def adding_item_data(oneDict, item_value, item_number):
+    """
+
+    :param oneDict: Dictionary holding one item values
+    :param item_value: integer describing a price per item
+    :param item_number: integer describing amount
+    :return:
+    """
     # Total value of current item + Total value of added stock of current item - total number of stock item
     oneDict["VALUE"] = (float(oneDict["VALUE"] * oneDict["NUMBER"]) + (float(item_value) * float(item_number))) / (
                 oneDict["NUMBER"] + int(item_number))
@@ -9,7 +16,15 @@ def adding_when_item_is_found(oneDict, item_value, item_number):
     return(oneDict["VALUE"], oneDict["NUMBER"])
 
 
-def adding_item_to_inventory(inventory, item_name, item_value, item_number):
+def adding_new_item_to_inventory(inventory, item_name, item_value, item_number):
+     """
+     Goal: Adda new item to inventory list
+     :param inventory:
+     :param item_name:
+     :param item_value:
+     :param item_number:
+     :return:
+     """
      newItem = {}
      newItem["NAME"] = item_name
      newItem["NUMBER"] = int(item_number)
@@ -18,11 +33,20 @@ def adding_item_to_inventory(inventory, item_name, item_value, item_number):
      return inventory
 
 def get_item_data_from_user():
+    """
+    Goal: Ask user for item data and extract it from user input
+    :return:
+    """
     user_input = input("item name, item value, item number")
     user_input = user_input.split(",")
     return user_input[0], user_input[1], user_input[2]
 
 def add(param1):
+    """
+    Goal: Adding item data to inventory
+    :param param1:
+    :return:
+    """
     inventory = param1
     #format: A,item name, amount, price
     isFound = False
@@ -31,16 +55,22 @@ def add(param1):
         #print(oneDict)
         #If item is found make calculaton to get value of one item and add new stock to inventory stock.
         if item_name == one_item["NAME"]:
-            one_item["Value"], one_item["NUMBER"] = adding_when_item_is_found(one_item, item_value, item_number)
+            one_item["Value"], one_item["NUMBER"] = adding_item_data(one_item, item_value, item_number)
             isFound = True
 
     #If item not found in inventory add it to inventory
     if isFound == False:
-        inventory = adding_item_to_inventory(inventory, item_name, item_value, item_number)
+        inventory = adding_new_item_to_inventory(inventory, item_name, item_value, item_number)
 
     return inventory
 
 def selling_item_still_on_lager(oneDict, wantsToSell):
+    """
+    Goal: Remove item data from inventory
+    :param oneDict:
+    :param wantsToSell:
+    :return:
+    """
     oneDict["NUMBER"] = oneDict["NUMBER"] - wantsToSell
     # If amount after subtraction is 0 the value is also 0
     if oneDict["NUMBER"] == 0:
